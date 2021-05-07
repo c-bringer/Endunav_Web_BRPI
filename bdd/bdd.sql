@@ -7,7 +7,7 @@ USE endunav;
 -- Créer la table users
 CREATE TABLE users
 (
-    id INT PRIMARY KEY NOT NULL,
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
     name VARCHAR(50),
     email VARCHAR(80),
     password VARCHAR(255),

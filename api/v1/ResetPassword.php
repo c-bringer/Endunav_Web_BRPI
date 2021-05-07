@@ -54,11 +54,11 @@ else {
             } else {
                 $newPassword = Utils::generatePassword();
 
-                $to = 'contact@bikelock.fr';
+                $to = 'contact@endunav.fr';
                 $subject = 'Nouveau mot de passe';
 
-                $headers = "From: no-reply@bikelock.fr\r\n";
-                $headers .= "Reply-To: no-reply@bikelock.fr\r\n";
+                $headers = "From: no-reply@endunav.fr\r\n";
+                $headers .= "Reply-To: no-reply@endunav.fr\r\n";
                 $headers .= "MIME-Version: 1.0\r\n";
                 $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 

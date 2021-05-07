@@ -21,7 +21,7 @@ $database = new Database();
 $db = $database->getConnection();
 
 //Get data
-$data = json_decode(file_get_contents("php://input"));
+$data = $_POST;
 $returnData = [];
 
 //If request method is not post
@@ -30,12 +30,12 @@ if($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 //Checking empty fields
-else if(!isset($data->name) 
-    || !isset($data->email) 
-    || !isset($data->password)
-    || empty(trim($data->name))
-    || empty(trim($data->email))
-    || empty(trim($data->password))
+else if(!isset($data['name']) 
+    || !isset($data['email']) 
+    || !isset($data['password'])
+    || empty(trim($data['name']))
+    || empty(trim($data['email']))
+    || empty(trim($data['password']))
     ) {
         $fields = ['fields' => ['name', 'email', 'password']];
         $returnData = msg(0, 422, 'ALL_INPUT_INCOMPLETE', $fields);
@@ -43,15 +43,15 @@ else if(!isset($data->name)
 
 //If there are no empty fields then
 else {
-    $name = trim($data->name);
-    $email = trim($data->email);
-    $password = trim($data->password);
+    $name = trim($data['name']);
+    $email = trim($data['email']);
+    $password = trim($data['password']);
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $returnData = msg(0, 422, 'INVALID_EMAIL_ADDRESS');
     } else if(strlen($password) < 8) {
         $returnData = msg(0, 422, 'INVALID_PASSWORD');
-    } else if(strlen($name) < 3) {
+    } else if(strlen($name) < 2) {
         $returnData = msg(0, 422, 'INVALID_NAME');
     } else {
         try {
@@ -63,7 +63,7 @@ else {
             if($checkEmailStmt->rowCount()) {
                 $returnData = msg(0, 422, 'EMAIL_ALREADY_USED');
             } else {
-                $insertQuery = "INSERT INTO `users`(`name`, `email`, `password`) VALUES(:name, :email, :password)";
+                $insertQuery = "INSERT INTO `users`(`name`, `email`, `password`, `status`) VALUES(:name, :email, :password, 1)";
                 $insertStmt = $db->prepare($insertQuery);
 
                 //Data binding
