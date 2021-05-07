@@ -21,7 +21,7 @@ $database = new Database();
 $db = $database->getConnection();
 
 //Get data
-$data = json_decode(file_get_contents("php://input"));
+$data = $_POST;
 $returnData = [];
 
 //If request method is not post
@@ -30,10 +30,10 @@ if($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 // Checking empty fields
-elseif(!isset($data->email) 
-    || !isset($data->password)
-    || empty(trim($data->email))
-    || empty(trim($data->password))
+elseif(!isset($data['email']) 
+    || !isset($data['password'])
+    || empty(trim($data['email']))
+    || empty(trim($data['password']))
     ) {
         $fields = ['fields' => ['email', 'password']];
         $returnData = msg(0, 422, 'ALL_INPUT_INCOMPLETE', $fields);
@@ -41,8 +41,8 @@ elseif(!isset($data->email)
 
 //If there are no empty fields then
 else {
-    $email = trim($data->email);
-    $password = trim($data->password);
+    $email = trim($data['email']);
+    $password = trim($data['password']);
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $returnData = msg(0, 422, 'INVALID_EMAIL_ADDRESS');
@@ -61,23 +61,28 @@ else {
             //If the user is founded by email
             if($queryStmt->rowCount()) {
                 $row = $queryStmt->fetch(PDO::FETCH_ASSOC);
-                $checkPassword = password_verify($password, $row['password']);
 
-                //Verifying the password, if is correct the send the login token
-                if($checkPassword) {
-                    $jwt = new JwtHandler();
-                    $token = $jwt->_jwt_encode_data(
-                        'auth0',
-                        array("user_id" => $row['id'])
-                    );
-                    
-                    $returnData = [
-                        'success' => 1,
-                        'code' => 'LOGIN_SUCCESS',
-                        'token' => $token
-                    ];
+                if($row['status'] == 0) {
+                    $returnData = msg(0, 422, 'DISABLED_ACCOUNT');
                 } else {
-                    $returnData = msg(0, 422, 'WRONG_PASSWORD');
+                    $checkPassword = password_verify($password, $row['password']);
+
+                    //Verifying the password, if is correct the send the login token
+                    if($checkPassword) {
+                        $jwt = new JwtHandler();
+                        $token = $jwt->_jwt_encode_data(
+                            'auth0',
+                            array("user_id" => $row['id'])
+                        );
+                        
+                        $returnData = [
+                            'success' => 1,
+                            'code' => 'LOGIN_SUCCESS',
+                            'token' => $token
+                        ];
+                    } else {
+                        $returnData = msg(0, 422, 'WRONG_PASSWORD');
+                    }   
                 }
             } else {
                 $returnData = msg(0, 422, 'NO_ACCOUNT');

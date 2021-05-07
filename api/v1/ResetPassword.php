@@ -22,7 +22,7 @@ $database = new Database();
 $db = $database->getConnection();
 
 //Get data
-$data = json_decode(file_get_contents("php://input"));
+$data = $_POST;
 $returnData = [];
 
 //If request method is not post
@@ -31,14 +31,14 @@ if($_SERVER["REQUEST_METHOD"] != "POST") {
 }
 
 //Checking empty fields
-else if(!isset($data->email)) {
+else if(!isset($data['email'])) {
         $fields = ['fields' => ['email']];
         $returnData = msg(0, 422, 'ALL_INPUT_INCOMPLETE', $fields);
 }
 
 //If there are no empty fields then
 else {
-    $email = trim($data->email);
+    $email = trim($data['email']);
 
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $returnData = msg(0, 422, 'INVALID_EMAIL_ADDRESS');
