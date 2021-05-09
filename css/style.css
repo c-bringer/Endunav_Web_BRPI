@@ -1,20 +1,10 @@
+/* ---------- GENERAL ---------- */
+
 body {
     font-family: 'Blender Pro';
     font-weight: 900;
     font-size: normal;
 }
-
-/* ---------- NAVBAR ---------- */
-
-.bg-dark {
-    background-color: #000000 !important;
-}
-
-.nav-link:hover {
-    color: #FF6601 !important;
-}
-
-/* ---------- CONNEXION ---------- */
 
 .btn-primary {
     background-color: #FF6601 !important;
@@ -30,7 +20,68 @@ body {
     border-color: #000000 !important;
 }
 
+.btn-secondary {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    border-start-start-radius: 10px;
+    border-start-end-radius: 0px;
+    border-end-start-radius: 10px;
+    border-end-end-radius: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #FF6601 !important;
+    border-color: #FF6601 !important;
+}
+
+
+.btn-warning {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    border-start-start-radius: 10px;
+    border-start-end-radius: 0px;
+    border-end-start-radius: 10px;
+    border-end-end-radius: 10px;
+}
+
+.btn-warning:hover {
+    background-color: #FF6601 !important;
+    border-color: #FF6601 !important;
+}
+
+/* ---------- NAVBAR ---------- */
+
+.bg-dark {
+    background-color: #000000 !important;
+}
+
+.nav-link:hover {
+    color: #FF6601 !important;
+}
+
+/* ---------- CONNEXION ---------- */
+
 .form-control {
+    border-start-start-radius: 10px;
+    border-start-end-radius: 0px;
+    border-end-start-radius: 10px;
+    border-end-end-radius: 10px;
+}
+
+/* ---------- DASHBOARD ----------- */
+
+.card {
+    border-color: #FF6601;
+    border-start-start-radius: 10px;
+    border-start-end-radius: 0px;
+    border-end-start-radius: 10px;
+    border-end-end-radius: 10px;
+}
+
+.card-number {
+    background-color: #FF6601;
+    color: #ffffff;
+    border-color: #FF6601;
     border-start-start-radius: 10px;
     border-start-end-radius: 0px;
     border-end-start-radius: 10px;
