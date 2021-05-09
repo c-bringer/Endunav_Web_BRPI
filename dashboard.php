@@ -1,3 +1,7 @@
+<?php
+$numberAccount = require_once("api/v1/dashboard/GetNumberAccount.php");
+$accounts = require_once("api/v1/dashboard/GetAccount.php");
+?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 
@@ -6,8 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
     <title>Dashboard - Endunav</title>
 </head>
@@ -39,7 +42,7 @@
                         <h5 class="card-title">Total de comptes</h5>
                         <p class="card-text">Ce nombre représente le nombres total de comptes sans prendre en compte le
                             status.</p>
-                        <span class="p-2 card-number">85</span>
+                        <span class="p-2 card-number"><?php echo $numberAccount[0][0]; ?></span>
                     </div>
                 </div>
             </div>
@@ -48,7 +51,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Comptes activés</h5>
                         <p class="card-text">Ce nombre représente le nombre de comptes activés.</p>
-                        <span class="p-2 card-number">85</span>
+                        <span class="p-2 card-number"><?php echo $numberAccount[0][1]; ?></span>
                     </div>
                 </div>
             </div>
@@ -57,7 +60,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Comptes désactivés</h5>
                         <p class="card-text">Ce nombre représente le nombre de comptes désactivés.</p>
-                        <span class="p-2 card-number">85</span>
+                        <span class="p-2 card-number"><?php echo $numberAccount[0][2]; ?></span>
                     </div>
                 </div>
             </div>
@@ -75,36 +78,24 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1,001</td>
-                        <td>random</td>
-                        <td>data</td>
-                        <td>placeholder</td>
-                        <td>
-                            <button type="button" class="btn btn-primary">Activer</button>
-                            <button type="button" class="btn btn-secondary">Désactiver</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>placeholder</td>
-                        <td>irrelevant</td>
-                        <td>visual</td>
-                        <td>
-                            <button type="button" class="btn btn-primary">Activer</button>
-                            <button type="button" class="btn btn-secondary">Désactiver</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>data</td>
-                        <td>rich</td>
-                        <td>dashboard</td>
-                        <td>
-                            <button type="button" class="btn btn-primary">Activer</button>
-                            <button type="button" class="btn btn-secondary">Désactiver</button>
-                        </td>
-                    </tr>
+                    <?php
+                        foreach($accounts[0] as $account) {
+                            echo "<tr>";
+                            echo "<td>" . $account['id'] . "</td>";
+                            echo "<td>" . $account['name'] . "</td>";
+                            echo "<td>" . $account['email'] . "</td>";
+                            echo "<td>" . $account['status'] . "</td>";
+                            echo "<td>";
+                            echo '<form method="POST" action="api/v1/dashboard/UpdateAccountStatus.php?email=';
+                            echo $account['email'];
+                            echo '">';
+                            echo '<input style="margin-right: 10px;" type="submit" name="action" value="Activer" class="btn btn-primary">';
+                            echo '<input type="submit" name="action" value="Désactiver" class="btn btn-secondary">';
+                            echo "</form>";
+                            echo "</td>";
+                            echo "</tr>";
+                        }
+                    ?>
                 </tbody>
             </table>
         </div>
