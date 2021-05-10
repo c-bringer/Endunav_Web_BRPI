@@ -1,6 +1,29 @@
 <?php
-$numberAccount = require_once("api/v1/dashboard/GetNumberAccount.php");
-$accounts = require_once("api/v1/dashboard/GetAccount.php");
+require_once("dao/StatsDao.php");
+require_once("dao/UserDao.php");
+session_start();
+
+if(!isset($_SESSION['user'])) {
+    header('Location: index.html');
+}
+
+$stats = new StatsDao();
+$numberAccount = $stats->getTotalAccounts();
+$numberAccountActivated = $stats->getAccountsActivated();
+$numberAccountDisabled =$stats->getAccountsDisabled();
+$accounts = $stats->getAllAccountsDetails();
+
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$submit = isset($_POST['action']);
+
+if($submit) {
+    $user = new UserDao();
+    if($_POST['action'] == 'Activer') {
+        $user->activateAccount($email);
+    } else if($_POST['action'] == 'Désactiver') {
+        $user->disableAccount($email);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr-FR">
@@ -28,7 +51,7 @@ $accounts = require_once("api/v1/dashboard/GetAccount.php");
                 </ul>
 
                 <div class="text-end">
-                    <button type="button" class="btn btn-warning">Déconnexion</button>
+                    <a href="deconnexion.php"><button type="button" class="btn btn-warning">Déconnexion</button></a>
                 </div>
             </div>
         </div>
@@ -42,7 +65,7 @@ $accounts = require_once("api/v1/dashboard/GetAccount.php");
                         <h5 class="card-title">Total de comptes</h5>
                         <p class="card-text">Ce nombre représente le nombres total de comptes sans prendre en compte le
                             status.</p>
-                        <span class="p-2 card-number"><?php echo $numberAccount[0][0]; ?></span>
+                        <span class="p-2 card-number"><?php echo $numberAccount; ?></span>
                     </div>
                 </div>
             </div>
@@ -51,7 +74,7 @@ $accounts = require_once("api/v1/dashboard/GetAccount.php");
                     <div class="card-body">
                         <h5 class="card-title">Comptes activés</h5>
                         <p class="card-text">Ce nombre représente le nombre de comptes activés.</p>
-                        <span class="p-2 card-number"><?php echo $numberAccount[0][1]; ?></span>
+                        <span class="p-2 card-number"><?php echo $numberAccountActivated; ?></span>
                     </div>
                 </div>
             </div>
@@ -60,7 +83,7 @@ $accounts = require_once("api/v1/dashboard/GetAccount.php");
                     <div class="card-body">
                         <h5 class="card-title">Comptes désactivés</h5>
                         <p class="card-text">Ce nombre représente le nombre de comptes désactivés.</p>
-                        <span class="p-2 card-number"><?php echo $numberAccount[0][2]; ?></span>
+                        <span class="p-2 card-number"><?php echo $numberAccountDisabled; ?></span>
                     </div>
                 </div>
             </div>
@@ -74,21 +97,22 @@ $accounts = require_once("api/v1/dashboard/GetAccount.php");
                         <th>Nom complet</th>
                         <th>Adresse mail</th>
                         <th>Status</th>
+                        <th>Admin</th>
                         <th>Administration</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        foreach($accounts[0] as $account) {
+                        foreach($accounts as $account) {
                             echo "<tr>";
                             echo "<td>" . $account['id'] . "</td>";
                             echo "<td>" . $account['name'] . "</td>";
                             echo "<td>" . $account['email'] . "</td>";
                             echo "<td>" . $account['status'] . "</td>";
+                            echo "<td>" . $account['admin'] . "</td>";
                             echo "<td>";
-                            echo '<form method="POST" action="api/v1/dashboard/UpdateAccountStatus.php?email=';
-                            echo $account['email'];
-                            echo '">';
+                            echo '<form method="POST">';
+                            echo '<input name="email" type="hidden" value="' . $account['email'] . '">';
                             echo '<input style="margin-right: 10px;" type="submit" name="action" value="Activer" class="btn btn-primary">';
                             echo '<input type="submit" name="action" value="Désactiver" class="btn btn-secondary">';
                             echo "</form>";

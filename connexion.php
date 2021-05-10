@@ -1,3 +1,24 @@
+<?php
+session_start();
+require_once("dao/UserDao.php");
+
+if(isset($_SESSION['user'])) {
+    header('Location: dashboard.php');
+}
+
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+$submit = isset($_POST['form']);
+
+if($submit) {
+    if($email != "" || $password != "") {
+        $user = new UserDao();
+        $user->loginUser($email, $password);
+    } else {
+        echo "Merci de compléter tous les champs.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr-FR">
 
@@ -56,20 +77,20 @@
 
 <body class="text-center">
     <main class="form-signin">
-        <form>
+        <form method="POST">
             <img class="mb-4" src="img/logo/endunav_orange.svg" alt="" width="72" height="57">
             <h1 class="h3 mb-3 fw-normal">Connexion</h1>
 
             <div class="form-floating">
-                <input type="email" class="form-control" id="floatingInput" placeholder="Adresse mail">
+                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="Adresse mail" required>
                 <label for="floatingInput">Adresse mail</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe">
+                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Mot de passe" required>
                 <label for="floatingPassword">Mot de passe</label>
             </div>
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Connexion</button>
+            <button class="w-100 btn btn-lg btn-primary" name="form" type="submit">Connexion</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2021</p>
         </form>
     </main>

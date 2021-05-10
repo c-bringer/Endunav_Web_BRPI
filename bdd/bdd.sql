@@ -11,5 +11,6 @@ CREATE TABLE users
     name VARCHAR(50),
     email VARCHAR(80),
     password VARCHAR(255),
-    status INT(1)
+    status INT(1),
+    admin INT(1)
 )
