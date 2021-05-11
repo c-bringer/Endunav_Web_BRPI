@@ -54,6 +54,15 @@ else {
             } else {
                 $newPassword = Utils::generatePassword();
 
+                $updatePassword = "UPDATE `users` SET `password` = :password WHERE `email` = :email";
+                $updatePasswordStmt = $db->prepare($updatePassword);
+    
+                //Data binding
+                $updatePasswordStmt->bindValue(':password', password_hash($newPassword, PASSWORD_DEFAULT), PDO::PARAM_STR);
+                $updatePasswordStmt->bindValue(':email', $email, PDO::PARAM_STR);
+    
+                $updatePasswordStmt->execute();
+
                 $to = 'contact@endunav.fr';
                 $subject = 'Nouveau mot de passe';
 

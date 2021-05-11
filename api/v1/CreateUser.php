@@ -63,7 +63,7 @@ else {
             if($checkEmailStmt->rowCount()) {
                 $returnData = msg(0, 422, 'EMAIL_ALREADY_USED');
             } else {
-                $insertQuery = "INSERT INTO `users`(`name`, `email`, `password`, `status`) VALUES(:name, :email, :password, 1)";
+                $insertQuery = "INSERT INTO `users`(`name`, `email`, `password`, `status`, `admin`) VALUES(:name, :email, :password, 1, 0)";
                 $insertStmt = $db->prepare($insertQuery);
 
                 //Data binding
