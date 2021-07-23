@@ -49,6 +49,11 @@ body {
     border-color: #FF6601 !important;
 }
 
+.accordion-button:not(.collapsed) {
+    color: black !important;
+    background-color: rgba(255, 102, 1, 0.5) !important;
+}
+
 /* ---------- NAVBAR ---------- */
 
 .bg-dark {

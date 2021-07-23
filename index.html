@@ -9,26 +9,162 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <title>Endunav, l'application pour les randonnées en moto d'enduro</title>
 </head>
 
 <body>
+    <!-- STAR HEADER -->
     <header class="p-3 bg-dark text-white">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <a href="#" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
                     <img class="bi me-2" height="32" src="img/logo/endunav_orange.svg" alt="Logo Endunav">
                 </a>
 
                 <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white">Accueil</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Fonctionnalités</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">FAQ</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">À propos</a></li>
+                    <li><a href="#about" class="nav-link px-2 text-white">À propos</a></li>
+                    <li><a href="#features" class="nav-link px-2 text-white">Fonctionnalités</a></li>
+                    <li><a href="#faq" class="nav-link px-2 text-white">FAQ</a></li>
                 </ul>
             </div>
         </div>
     </header>
+    <!-- END HEADER -->
+
+    <!-- START A PROPOS -->
+    <div class="container pt-3 pb-3" id="about">
+        <h2>À propos</h2>
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Voici l'équipe de Endunav</h2>
+                <p class="lead">Endunav est né d'un projet entre deux amis d'enfance et enduristes en moto suite à un
+                    constat du manque de partage de chemins de manière numérique.
+                    De ce fait, ils ont décidé de développer une application qui permet en fonction de sa position de
+                    base et en plaçant un point de destination sur une carte, l'application va déterminé le trajet le
+                    plus court pour s'y rendre en prenant un manimum de chemins.</p>
+            </div>
+            <div class="col-md-5">
+                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                    height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa"
+                        dy=".3em">500x500</text>
+                </svg>
+
+            </div>
+        </div>
+    </div>
+    <!-- END A PROPOS -->
+
+    <!-- START FONCTIONNALITES -->
+    <div class="container pt-3 pb-3" id="features">
+        <h2>Fonctionnalités</h2>
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7">
+                <h2 class="featurette-heading">Carte IGN</h2>
+                <p class="lead">L'application embarque une cartographie de type IGN, ce qui permet de pouvoir se repérer
+                    et de trouver des chemins plus facilement en fonction de notre position.</p>
+            </div>
+            <div class="col-md-5">
+                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                    height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa"
+                        dy=".3em">500x500</text>
+                </svg>
+
+            </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+                <h2 class="featurette-heading">Navigation GPS</h2>
+                <p class="lead">Lorsque vous avez placer sur la carte votre point de destination, l'application
+                    détermine le trajet le plus court pour s'y rendre en fonction de votre position. Si vous le
+                    souhaitez, en plus de prévisualiser le tracé, vous pouvez commencer la navigation avec l'assistance
+                    vocale ou non.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+                <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500"
+                    height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500"
+                    preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#eee" /><text x="50%" y="50%" fill="#aaa"
+                        dy=".3em">500x500</text>
+                </svg>
+
+            </div>
+        </div>
+    </div>
+    <!-- END FONCTIONNALITES -->
+
+    <!-- START FAQ -->
+    <div class="container accordion pt-3" id="faq">
+        <h2>FAQ</h2>
+        <hr class="featurette-divider">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    L'application enregistre-t-elle des données personnelles ?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                data-bs-parent="#faq">
+                <div class="accordion-body">
+                    Non, l'application n'enregistre aucune données personnelles à part les données de l'inscription.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Les données GPS sont-elles toujours trackées ?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                data-bs-parent="#faq">
+                <div class="accordion-body">
+                    Les données GPS de l'application ne sont jamais stockées et sont utilisées uniquement lorsque
+                    l'appliction est active.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    L'application est disponible sur iOS et Android ?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                data-bs-parent="#faq">
+                <div class="accordion-body">
+                    Non, elle est uniquement disponible sur Android.
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END FAQ -->
+
+
+    <footer class="container pt-3">
+        <p class="float-end"><a href="#">Retour en haut</a></p>
+        <p>&copy; 2021 Endunav</p>
+    </footer>
 </body>
 
 </html>
